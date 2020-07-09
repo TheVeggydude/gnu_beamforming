@@ -4,11 +4,11 @@ import matplotlib.pyplot as plt
 from scipy.constants import c
 
 # Constants
-num_samples = 13001
-samples_per_second = 100000000
-freq_Hz = 1000000.0  # 1 MHz
-shift_radians = np.pi/2.0
-antenna_distance = 379854120.36127454
+num_samples = 1000
+freq_Hz = 1000000000.0  # 1 GHz
+samples_per_second = 200*freq_Hz
+shift_radians = np.pi/4.0
+antenna_distance = 12
 
 # Create the time axis (seconds)
 t = np.linspace(0.0, ((num_samples - 1) / samples_per_second), num_samples)
@@ -45,9 +45,10 @@ print("Manual phase shift: {}".format(shift_radians))
 print("Calculated phase shift: {}".format(phase_shift))
 
 # Compute the distance travelled by the longer signal
-delta_x = (c / freq_Hz) * (phase_shift / 2 * np.pi)
+delta_x = (c / freq_Hz) * (phase_shift / 2.0 * np.pi)
 print(delta_x)
 
 # Compute angle of the source of signal
 angle = np.arccos(delta_x/antenna_distance)
-print(angle)
+print("Angle in rad", angle)
+print("Angle in deg", np.rad2deg(angle))
